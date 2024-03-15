@@ -10,7 +10,7 @@ const WeatherForecast = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
-  const API_KEY = 'DGDehNf5l2ypfH8lstF5iPaFyN2bQQar';
+  const API_KEY = process.env.REACT_APP_WEATHER_KEY;
 
   const fetchWeatherData = async () => {
     if (!locationQuery) {
@@ -76,39 +76,42 @@ const WeatherForecast = () => {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen transition-colors duration-500 overflow-y-hidden bg-gradient-to-b from-yellow-100 to-blue-300">
-  <div className="p-6 rounded-lg shadow-lg text-center transition-colors duration-500 overflow-y-hidden bg-gradient-to-r from-blue-100 to-orange-300">
-    <img className='sum-image' width="68" height="68" src="https://img.icons8.com/emoji/48/sun-with-face.png" alt="sun-with-face"/>
-    <h2 className="text-xl text-black">
-      Welcome to Live Weather Update. Type Your City Name Below and get the Live Update NOW!
-    </h2>
-    <input
-      type="text"
-      value={locationQuery}
-      onChange={(e) => setLocationQuery(e.target.value)}
-      placeholder="Enter city name"
-      className="input border p-2 w-full rounded my-2"
-    />
-    <div className="flex justify-center gap-4">
-      <button onClick={fetchWeatherData} className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600">Get Weather</button>
-      <button onClick={handleUseCurrentLocation} className="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Use Current Location</button>
-    </div>
-    {loading && <p>Loading...</p>}
-    {error && <p className="text-red-500">{error}</p>}
-    {weatherData.temperature && (
-      <div className="mt-4">
-        {getWeatherIcon(weatherData.weatherCode)}
-        <h2 className="text-xl font-bold">{locationQuery}</h2>
-        <p>Temperature: {weatherData.temperature}°C</p>
-        <p>Humidity: {weatherData.humidity}%</p>
-        <p>Weather Code: {weatherData.weatherCode}</p>
-      </div>
-    )}
-    <button
-      onClick={() => navigate(-1)} // Navigate back
-      className="mt-4 bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-    >
-      Back
-    </button>
+      <div className="p-6 rounded-lg w-4/6 shadow-lg text-center transition-colors duration-500 overflow-y-hidden bg-gradient-to-r from-blue-100 to-orange-300">
+        <img className='sum-image' width="68" height="68" src="https://img.icons8.com/emoji/48/sun-with-face.png" alt="sun-with-face"/>
+        <h2 className="text-xl text-black">
+          Welcome to Weather Forecast Page. 
+        </h2>
+        
+        <div className='flex'>
+          <input
+            type="text"
+            value={locationQuery}
+            onChange={(e) => setLocationQuery(e.target.value)}
+            placeholder="Enter city name"
+            className="input border p-3 w-full rounded-3xl my-2"
+          />
+          <button
+            onClick={() => navigate(-1)} 
+            className="bg-gray-600 text-white rounded-full hover:bg-gray-600"
+          >
+          Go Back 
+          </button>
+        </div>
+        <div className="flex justify-center gap-4">
+          <button onClick={fetchWeatherData} className="bg-blue-500 text-white px-4 py-2 rounded-full hover:bg-blue-600">Get Weather</button>
+          <button onClick={handleUseCurrentLocation} className="bg-green-500 text-white px-4 py-2 rounded-full hover:bg-green-600">Use Current Location</button>
+        </div>
+        {loading && <p>Loading...</p>}
+        {error && <p className="text-red-500">{error}</p>}
+        {weatherData.temperature && (
+          <div className="mt-4">
+            {getWeatherIcon(weatherData.weatherCode)}
+            <h2 className="text-xl font-bold">{locationQuery}</h2>
+            <p>Temperature: {weatherData.temperature}°C</p>
+            <p>Humidity: {weatherData.humidity}%</p>
+            <p>Weather Code: {weatherData.weatherCode}</p>
+          </div>
+        )}
   </div>
 </div>
 
