@@ -1,0 +1,51 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.sum-image{
+  display:unset;
+}
+
+@keyframes pulsate {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.5;
+    }
+    100% {
+      transform: scale(1.5);
+      opacity: 0;
+    }
+  }
+  
+  .pulsating-circle {
+    animation: pulsate 2s infinite;
+    fill: #ff6347; 
+    transform-origin: center;
+  }
+  
+
+  @keyframes riseAnimation {
+    0% {
+      transform: translateY(20px) scale(0.8);
+      opacity: 0.5;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(-20px) scale(1.2);
+      opacity: 0.5;
+    }
+  }
+  
+  .sun-animation, .moon-animation {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    animation: riseAnimation 2.5s ease-in-out infinite;
+    transform-origin: center;
+  }
+  
